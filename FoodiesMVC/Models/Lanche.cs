@@ -17,7 +17,7 @@ namespace FoodiesMVC.Models
         [Display(Name = "Descrição")]
         [MinLength(20, ErrorMessage = "A descrição deve ter no mínimo 20 caracteres")]
         [MaxLength(250, ErrorMessage = "A descrição deve ter no máximo 250 caracteres")]
-        public string Descricao { get; set; }
+        public string Descricao { get; set;}
 
         [Required(ErrorMessage = "O Preço deve ser informado")]
         [Display(Name = "Preço")]

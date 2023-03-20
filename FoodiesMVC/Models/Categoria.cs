@@ -7,7 +7,7 @@ namespace FoodiesMVC.Models
     public class Categoria
     {
         [Key]
-        public int CategoriaId { get; set; }
+        public int CategoriaId { get; set;}
 
         [Required(ErrorMessage="O nome da categoria deve ser informado")]
         [Display(Name = "Nome da Categoria")]
