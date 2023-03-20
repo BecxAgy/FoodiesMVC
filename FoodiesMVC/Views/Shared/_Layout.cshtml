@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FoodiesMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FoodiesMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/resposive-site.css" />
+</head>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navigation-wrap">
+                <div class="container">
+                  <a class="navbar-brand" href="#"><img src="~/images/logo.png"></a/>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-stream navbar-toggler-icon"></i>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#aboutus">Sobre Nós</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#explorefoods">Cardápio</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#explorefoods">Criar conta</a>
+                      </li>
+                     <li><button class="main-btn">Entrar</button></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+    </header>
+
+    <div class="container-fluid p-0">
+        <main role="main" > 
+            @RenderBody()
+        </main>
+    </div>
+
+
+<footer id="footer">
+            <div class="py-5">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <a class="footer-link" href="#">Registre-se</a>
+                    <a class="footer-link" href="#">Perguntas</a>
+                    <a class="footer-link" href="#">Sobre nós</a>
+                    <div class="footer-social pt-4 text-center">
+                      <a href="#"><i class="fab fa-twitter"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
+                      <a href="#"><i class="fab fa-linkedin"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="copy-right text-center pt-5">
+                      <p class="text-light">© 2023. Foodies. Todos os direitos reservados.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </footer>
+
+
+     
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</html>
