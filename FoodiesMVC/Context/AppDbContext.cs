@@ -10,6 +10,7 @@ namespace FoodiesMVC.Context
 
         }
         
-        public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Lanche> Lanches { get; set; }
     }
 }
