@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FoodiesMVC.Models.Lanche>
+﻿@model LancheListViewModel
 
 @{
     ViewData["Title"] = "List";
@@ -13,28 +13,13 @@
 <div class="explore-food wrapper">
     <div class="container">
 
-       <div class="row pt-5">
-            @foreach (var lanche in Model) {
-                 <div class="col-lg-4 col-md-5 mb-lg-2 mb-2">
-                
-                      <div class="card">
-                           <img src=@lanche.ImagemUrl class="img-fluid">
-                           <div class="pt-3">
-
-                                        <h4>@lanche.Nome</h4>
-                                        <p>Time: 15 - 20 minutes | @lanche.IsFavorito</p>
-                                        <span> @lanche.Preco.ToString("c")  </span>
-                                        <button class="mt-4 main-btn">Comprar</button>
-                                      </div>
-                      </div>
-                
-                </div>
-              
-          
+        <div class="row pt-5">
+            @foreach (var lanche in Model.Lanches)
+            {
+               <partial name="_LancheResumo" for="@lanche"/>
             }
-      </div>
-    </div>
+            </div>
+
+        </div>
 
 </div>
-
-   

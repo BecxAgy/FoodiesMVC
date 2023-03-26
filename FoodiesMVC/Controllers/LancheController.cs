@@ -1,5 +1,6 @@
 ﻿using FoodiesMVC.Repositories;
 using FoodiesMVC.Repositories.Interfaces;
+using FoodiesMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiesMVC.Controllers
@@ -15,8 +16,10 @@ namespace FoodiesMVC.Controllers
 
         public IActionResult List()
         {
-            var lanches = _repository.Lanches;
-            return View(lanches);
+            var lanchesListViewModel = new LancheListViewModel();
+            lanchesListViewModel.Lanches = _repository.Lanches;
+            lanchesListViewModel.CategoriaAtual = "Categoria Atual";
+            return View(lanchesListViewModel);
         }
     }
 }
