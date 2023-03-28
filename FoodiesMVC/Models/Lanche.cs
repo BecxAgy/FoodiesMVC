@@ -25,6 +25,11 @@ namespace FoodiesMVC.Models
         [Range(1, 999.99, ErrorMessage ="O Preço deve estar entre {0} e {1}")]
         public decimal Preco { get; set; }
 
+        [Display(Name = "Tempo de preparo")]
+        [Column(TypeName = "decimal(5,2)")]
+        [Range(10,300, ErrorMessage = "A duração média que um pedido leva é de 10 min a 300 min.")]
+        public decimal DuracaoMediaMin { get; set; }
+
         [Display(Name = "Caminho da Imagem Normal")]
         [StringLength(100, MinimumLength = 10, ErrorMessage = "O {0} deve ter no máximo {1}")]
         public string ImagemUrl { get; set; }
