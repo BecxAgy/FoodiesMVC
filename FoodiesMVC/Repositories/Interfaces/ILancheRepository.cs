@@ -6,5 +6,7 @@ namespace FoodiesMVC.Repositories.Interfaces
     public interface ILancheRepository
     {
         IEnumerable<Lanche> Lanches { get; }
+        IEnumerable<Lanche> LanchesFavoritos { get; }
+        Lanche getLancheById { get; }
     }
 }
