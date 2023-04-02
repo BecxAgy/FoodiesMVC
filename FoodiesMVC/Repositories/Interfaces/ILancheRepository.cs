@@ -7,6 +7,6 @@ namespace FoodiesMVC.Repositories.Interfaces
     {
         IEnumerable<Lanche> Lanches { get; }
         IEnumerable<Lanche> LanchesFavoritos { get; }
-        Lanche getLancheById { get; }
+        Lanche GetLancheById(int id);
     }
 }

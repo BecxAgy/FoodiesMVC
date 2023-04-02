@@ -19,9 +19,11 @@ namespace FoodiesMVC.Repositories
         public IEnumerable<Lanche> LanchesFavoritos => _context.Lanches.Where(lanche => lanche.IsFavorito)
             .Include(c => c.Categoria);
 
+       
+
         public Lanche GetLancheById(int id)
         {
-           return _context.Lanches.FirstOrDefault(l => l.LancheId == id);
+           return  _context.Lanches.FirstOrDefault(l => l.LancheId == id);
         } 
     }
 }
