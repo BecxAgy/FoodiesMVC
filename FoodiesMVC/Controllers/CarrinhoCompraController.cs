@@ -23,12 +23,12 @@ namespace FoodiesMVC.Controllers
             var carrinhoCompras = _carrinho.GetCarrinhoCompraItens();
 
             //Atribuindo o carrinho de compras do usuário
-            _carrinho.CarrinhoCompraItens = carrinhoCompras;
+            _carrinho.CarrinhoCompraItems = carrinhoCompras;
 
             CarrinhoCompraViewModel carrinhoVM = new CarrinhoCompraViewModel
             {
                 Carrinho = _carrinho,
-                ValorTotal = _carrinho.GetValorTotal(),
+                ValorTotal = _carrinho.GetCarrinhoCompraTotal(),
 
             };
 
@@ -41,7 +41,7 @@ namespace FoodiesMVC.Controllers
 
             if (lanche!=null)
             {
-                _carrinho.AdicionarItem(lanche);
+                _carrinho.AdicionarAoCarrinho(lanche);
             }
 
             return RedirectToAction("Index");
@@ -53,7 +53,7 @@ namespace FoodiesMVC.Controllers
 
             if (lanche != null)
             {
-                _carrinho.RemoverItem(lanche);
+                _carrinho.RemoverDoCarrinho(lanche);
             }
 
             return RedirectToAction("Index");

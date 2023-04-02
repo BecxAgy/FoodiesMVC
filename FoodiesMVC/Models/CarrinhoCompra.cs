@@ -6,103 +6,105 @@ namespace FoodiesMVC.Models
     public class CarrinhoCompra
     {
         private readonly AppDbContext _context;
-        public  string CarrinhoCompraId { get; set; }
-        public  List<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
 
         public CarrinhoCompra(AppDbContext context)
         {
-            _context = context;      
+            _context = context;
         }
 
+        public string CarrinhoCompraId { get; set; }
+        public List<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
         public static CarrinhoCompra GetCarrinho(IServiceProvider services)
         {
-            //Definição de uma sessão
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            //define uma sessão
+            ISession session =
+                services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
-            //Obtendo um gerando um tipo do nosso contexto
+            //obtem um serviço do tipo do nosso contexto 
             var context = services.GetService<AppDbContext>();
 
-            //Obtendo ou gerando um id para o carrinho de compra
+            //obtem ou gera o Id do carrinho
             string carrinhoId = session.GetString("CarrinhoId") ?? Guid.NewGuid().ToString();
 
-            //Atribui o id do carrinho na sessão
+            //atribui o id do carrinho na Sessão
             session.SetString("CarrinhoId", carrinhoId);
 
-            return new CarrinhoCompra(context) { CarrinhoCompraId = carrinhoId };
+            //retorna o carrinho com o contexto e o Id atribuido ou obtido
+            return new CarrinhoCompra(context)
+            {
+                CarrinhoCompraId = carrinhoId
+            };
         }
 
-        public void AdicionarItem(Lanche lanche)
+        public void AdicionarAoCarrinho(Lanche lanche)
         {
-            //Primeiro devemos achar no carrinhoCompras do banco um lanche igual ao que está sendo passad por parâmetro e verificar
-            //também se está no mesmo carrinhho de compra. Faremos essa lógicapara saber se iremos criar um carrinhocompraitem ou
-            //se vamos apenas setar a quantidade daquele item no carrinho
-            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(item => item.Lanche.LancheId == lanche.LancheId 
-            && item.CarrinhoCompraId == CarrinhoCompraId);
+            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(
+                     s => s.Lanche.LancheId == lanche.LancheId &&
+                     s.CarrinhoCompraId == CarrinhoCompraId);
 
-            if(carrinhoCompraItem == null)
+            if (carrinhoCompraItem == null)
             {
-                var item = new CarrinhoCompraItem()
+                carrinhoCompraItem = new CarrinhoCompraItem
                 {
-                    CarrinhoCompraId = CarrinhoCompraId,//definido pela session
-                    Lanche = lanche,//passado por parâmetro
-                    Quantidade = 1 //valor inicial
+                    CarrinhoCompraId = CarrinhoCompraId,
+                    Lanche = lanche,
+                    Quantidade = 1
                 };
-
-                CarrinhoCompraItens.Add(item);
+                _context.CarrinhoCompraItens.Add(carrinhoCompraItem);
             }
             else
             {
                 carrinhoCompraItem.Quantidade++;
             }
-
             _context.SaveChanges();
         }
 
-        public void RemoverItem(Lanche lanche)
+        public int RemoverDoCarrinho(Lanche lanche)
         {
-            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(item => item.Lanche.LancheId == lanche.LancheId
-            && item.CarrinhoCompraId == CarrinhoCompraId);
+            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(
+                   s => s.Lanche.LancheId == lanche.LancheId &&
+                   s.CarrinhoCompraId == CarrinhoCompraId);
 
-            if(carrinhoCompraItem != null)
+            var quantidadeLocal = 0;
+
+            if (carrinhoCompraItem != null)
             {
-                if(carrinhoCompraItem.Quantidade > 1)
+                if (carrinhoCompraItem.Quantidade > 1)
                 {
                     carrinhoCompraItem.Quantidade--;
+                    quantidadeLocal = carrinhoCompraItem.Quantidade;
                 }
                 else
                 {
-                    CarrinhoCompraItens.Remove(carrinhoCompraItem);
+                    _context.CarrinhoCompraItens.Remove(carrinhoCompraItem);
                 }
             }
+            _context.SaveChanges();
+            return quantidadeLocal;
         }
-
 
         public List<CarrinhoCompraItem> GetCarrinhoCompraItens()
         {
-            return CarrinhoCompraItens ?? (CarrinhoCompraItens = _context.CarrinhoCompraItens.
-                Where(c => c.CarrinhoCompraId == CarrinhoCompraId).
-                Include(s => s.Lanche).
-                ToList());
+            return CarrinhoCompraItems ??
+                   (CarrinhoCompraItems =
+                       _context.CarrinhoCompraItens.Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                           .Include(s => s.Lanche)
+                           .ToList());
         }
-
 
         public void LimparCarrinho()
         {
-            var carrinho = _context.CarrinhoCompraItens.Where(c => c.CarrinhoCompraId == CarrinhoCompraId);
+            var carrinhoItens = _context.CarrinhoCompraItens
+                                 .Where(carrinho => carrinho.CarrinhoCompraId == CarrinhoCompraId);
 
-            _context.CarrinhoCompraItens.RemoveRange(carrinho);
-
+            _context.CarrinhoCompraItens.RemoveRange(carrinhoItens);
             _context.SaveChanges();
         }
 
-
-        public decimal GetValorTotal()
+        public decimal GetCarrinhoCompraTotal()
         {
-            //obtenho a lista e vou somando os valores selecionados
-            var total =  _context.CarrinhoCompraItens.
-                Where(c => c.CarrinhoCompraId == CarrinhoCompraId).
-                Select(item => item.Quantidade * item.Lanche.Preco).Sum();
-
+            var total = _context.CarrinhoCompraItens.Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                .Select(c => c.Lanche.Preco * c.Quantidade).Sum();
             return total;
         }
     }
