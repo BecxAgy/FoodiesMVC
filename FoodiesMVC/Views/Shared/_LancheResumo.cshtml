@@ -8,16 +8,30 @@
 
             <h4>@Model.Nome</h4>
             <p>Time: 15 - 20 minutes | @Model.IsFavorito</p>
-            <span> @Model.Preco.ToString("c")  </span>
-            <div class="row">
-                <div class="col-6 text-end px-2">
-                    <i class="fa-sharp fa-solid fa-heart"></i>     
-                </div>
+             
+             <div class="row tab-lanche">
 
-                <div class="col-6 px-2 ">
-                   <i class="fa-sharp fa-solid fa-cart-plus"></i>
-                </div>
+                 <div class="col">
+                         <span> @Model.Preco.ToString("c") </span>
+                  </div>
+
+                  <div class="col mt-2 text-center">
+                      <a asp-action="AdicionarItem" asp-controller="CarrinhoCompra" asp-route-lancheId="@Model.LancheId">
+                   <i class="fa-solid fa-cart-plus"></i>
+               </a>
+                  </div>
+
+                  <div class="col p-2 text-end me-3">
+                        <i class="fa-solid fa-heart"></i>
+                   </div>
+                   
             </div>
+
+                 
+               
+                 
+             
+                  
         </div>
 
     </div>

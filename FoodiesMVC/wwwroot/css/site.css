@@ -269,6 +269,8 @@ scroll navbar fixed
         border-bottom: 0.625rem solid var(--white-color);
     }
 
+
+
 footer
 {
     background: var(--primary-color);
@@ -298,4 +300,10 @@ footer
     }
 
     
+.tab-lanche{
+    min-width:385px;
+}
 
+a{
+    color: var(--primary-color)!important;
+}

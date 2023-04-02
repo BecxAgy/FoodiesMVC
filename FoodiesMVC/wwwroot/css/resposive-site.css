@@ -1,7 +1,10 @@
-﻿@media (min-width: 1025px) {
-    .h-custom {
-        height: 100vh !important;
-    }
+﻿
+/*CART*/
+
+.img-cartlist {
+    height: 9.25rem;
+    width: 6rem;
+    border-radius: 1.25rem
 }
 
 .number-input input[type="number"] {
@@ -117,4 +120,8 @@
         .shopping-cart .def-number-input.number-input button.plus:before,
         .shopping-cart .def-number-input.number-input button.plus:after {
             background-color: #4285f4;
+        }
+
+        .scroll-content{
+            height: 35rem;
         }
