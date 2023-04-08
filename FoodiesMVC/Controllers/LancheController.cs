@@ -18,8 +18,19 @@ namespace FoodiesMVC.Controllers
         {
             var lanchesListViewModel = new LancheListViewModel();
             lanchesListViewModel.Lanches = _repository.Lanches;
-            lanchesListViewModel.CategoriaAtual = "Categoria Atual";
+            lanchesListViewModel.CategoriaAtual = "Todos os Lanches";
             return View(lanchesListViewModel);
         }
+
+        public RedirectToActionResult ToggleFavorite(int lancheId)
+        {
+            // Alterna o estado do item favorito no repositório
+            _repository.ToggleFavorite(lancheId);
+
+
+            return RedirectToAction("List");
+            
+        }
+
     }
 }

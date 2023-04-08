@@ -12,6 +12,7 @@ namespace FoodiesMVC.Repositories
         public LancheRepository(AppDbContext context)
         {
             _context = context;
+
         }
 
         public IEnumerable<Lanche> Lanches => _context.Lanches;
@@ -24,6 +25,24 @@ namespace FoodiesMVC.Repositories
         public Lanche GetLancheById(int id)
         {
            return  _context.Lanches.FirstOrDefault(l => l.LancheId == id);
-        } 
+        }
+
+        public void ToggleFavorite(int itemId)
+        {
+            var item = _context.Lanches.FirstOrDefault(i => i.LancheId == itemId);
+            if (item != null)
+            {
+                if (item.IsFavorito)
+                {
+                    item.IsFavorito = false;
+                }
+                else
+                {
+                    item.IsFavorito = true;
+                }
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

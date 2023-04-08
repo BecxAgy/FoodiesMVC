@@ -22,7 +22,17 @@
                   </div>
 
                   <div class="col p-2 text-end me-3">
-                        <i class="fa-solid fa-heart"></i>
+                     @if(@Model.IsFavorito){
+                         <a asp-action="ToggleFavorite" asp-controller="Lanche" asp-route-lancheId="@Model.LancheId">
+                           <i class="fa-solid fa-heart favorite-heart"></i>
+                        </a>
+                     }else{
+                     <a asp-action="ToggleFavorite" asp-controller="Lanche" asp-route-lancheId="@Model.LancheId">
+                       <i class="fa-regular fa-heart favorite-heart"></i>
+                     </a>
+
+                     }
+                        
                    </div>
                    
             </div>
