@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model HomeViewModel;
 
     <section id="home">
               <div class="container-fluid px-0 top-banner">
@@ -83,51 +81,18 @@
                     <div classs="col-sm-12">
                       <div class="text-content text-center">
                         <h2>Explore nosso Cardápio</h2>
-                        <p>A variedadede pratos é o nosso diferencial. Não se preocupe com o dia e nem a hora, a culinária vai do oriente ao ocidente.</p>
+                        <p>A variedade de pratos é o nosso diferencial. Não se preocupe com o dia e nem a hora, a culinária vai do oriente ao ocidente.</p>
                         <button class="white-btn p-2"><a asp-action="List" asp-controller="Lanche">Ver mais</a></button>
                       </div>
                     </div>
                       <div class="row pt-5">
+                          <div class="center">
 
-                        <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
-                          <div class="card">
-                          <img src="../images/img/img-3.jpg" class="img-fluid">
-                          <div class="pt-3">
-                            <h4>Sanduiche Vegetariano</h4>
-                            <p>Time: 15 - 20 minutes | Serves: 1</p>
-                            <span> $10.50 </span>
-                            <button class="mt-4 main-btn">Comprar</button>
+                               @foreach (var item in Model.LanchesFavoritos)
+                               {
+                                   <partial name="_LancheResumo" for="@item"/>
+                               }
                           </div>
-                         </div>
-
-                       </div>
-
-                        <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
-                          <div class="card">
-                          <img src="images/img/img-5.jpg" class="img-fluid">
-                          <div class="pt-3">
-                            <h4>Torta de Morango</h4>
-                            <p>Time: 15 - 20 minutes | Serves: 1</p>
-                            <span> $11.50 </span>
-                            <button class="mt-4 main-btn">Comprar</button>
-                          </div>
-                          </div>
-
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
-                          <div class="card">
-                          <img src="images/img/img-4.jpg" class="img-fluid">
-                          <div class="pt-3">
-                            <h4>Sanduiche Vegetariano</h4>
-                            <p>Time: 15 - 20 minutes | Serves: 1</p>
-                            <span> $10.50 </span>
-                            <button class="mt-4 main-btn">Comprar</button>
-                          </div>
-                          </div>
-
-                        </div>
-
                       </div>
 
                   </div>

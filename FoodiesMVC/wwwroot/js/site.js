@@ -46,3 +46,6 @@ navbar.forEach(function (a) {
 //    counter("count3", 0, 882, 3000);
 //    counter("count4", 0, 1989, 2000);
 //})
+
+
+

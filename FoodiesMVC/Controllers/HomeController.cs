@@ -1,4 +1,6 @@
 ﻿using FoodiesMVC.Models;
+using FoodiesMVC.Repositories.Interfaces;
+using FoodiesMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,22 +8,25 @@ namespace FoodiesMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILancheRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILancheRepository repository)
         {
-            _logger = logger;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var homeVM = new HomeViewModel
+            {
+                LanchesFavoritos = _repository.LanchesFavoritos
+           
+            };
+
+            return View(homeVM);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
